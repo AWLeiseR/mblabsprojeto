@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 //key : email  value:Object usuario{nome,endereço,email,cpf,senha}
 const cadastrarUsuario = async ({email, usuario}) =>{
     try {
-        await AsyncStorage.setItem(email, usuario)
+        await AsyncStorage.setItem('&'+email, usuario)
       } catch (e) {
         // saving error
       }
@@ -13,7 +13,10 @@ const cadastrarUsuario = async ({email, usuario}) =>{
 const usuarioExistente = async (email)=>{
     try{
         const usuario = await AsyncStorage.getItem(email)
-        return 1
+        if(usuario === null )
+            return null
+        else
+            return 1
     }catch(e){
         return 0
     }
@@ -31,32 +34,40 @@ const pegarUsuario = async (email) =>{
     }
 }
 
-const atualizarUsuario = (chave,usuario) =>{
-   
+const logarUsuario = async (usuario) =>{
+   try{
+    await AsyncStorage.setItem('*usuarioLogado*', usuario)
+   } catch(e){
+
+   }
 }
 
-const deletarUsuario = () =>{
+const logoutUsuario = async () =>{
+    try{
+        
+        await AsyncStorage.removeItem('*usuarioLogado*')
+        
+    }catch(e){
 
+    }
+
+}
+
+const autenticarUsuario = async ({email,senha}) =>{
+    pegarUsuario('&'+email)
+    .then(response => {
+        if(senha === response.senha){
+            logarUsuario(email).then(response=> {return 1})
+        }else{
+            return null
+        }
+    }).catch()
 }
 
 //armazenamento auxiliar
 //key : CPF value:email
 
-const salvarUsuarioCPF = (cpf,usuario) =>{
-    
-}
 
-const pegarUsuarioCPF = () =>{
-
-}
-
-const atualizarUsuarioCPF = () =>{
-
-}
-
-const deletarUsuarioCPF = () =>{
-
-}
 
 //armazenamento eventos
 //key: nome value: object evento{nome,local,data,valor ingresso,qtd ingresso}
@@ -69,6 +80,15 @@ const salvarEvento = async (evento) =>{
       } catch (e) {
         // saving error
       }
+}
+
+const eventoExistente = async (nome)=>{
+    try{
+        const evento = await AsyncStorage.getItem('$' + nome)
+        return 1
+    }catch(e){
+        return 0
+    }
 }
 
 const pegarEvento = async (nome) =>{
@@ -113,43 +133,20 @@ const deletarEvento = async (chave) =>{
 //armazenamento aux
 //key: data value: object evento{nomes}
 
-const salvarEventoData = () =>{
 
-}
 
-const pegarEventoData = () =>{
-
-}
-
-const atualizarEventoData = () =>{
-
-}
-
-const deletarEventoData = () =>{
-
-}
 //key: local value: object evento{nomes}
 
-const salvarEventoLocal = () =>{
 
-}
-
-const pegarEventoLocal = () =>{
-
-}
-
-const atualizarEventoLocal = () =>{
-
-}
-
-const deletarEventoLocal = () =>{
-
-}
 
 export {
     cadastrarUsuario,
     usuarioExistente,
+    autenticarUsuario,
+    logarUsuario,
+    logoutUsuario,
     salvarEvento,
+    eventoExistente,
     pegarEvento,
     pegarTodosEventos,
     deletarEvento
