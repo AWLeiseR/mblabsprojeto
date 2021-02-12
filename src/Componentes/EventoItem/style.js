@@ -13,7 +13,8 @@ const Styles = StyleSheet.create({
         shadowColor:'gray',
         backgroundColor:'white',
         borderRadius:20,
-        marginBottom:5
+        marginBottom:5,
+        padding:10
     },
     nomeEvento:{
         fontSize:width/16,

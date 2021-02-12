@@ -3,22 +3,35 @@ import {
     View,
     Text,
     ScrollView,
-    TouchableOpacity} from 'react-native'
+    TouchableOpacity,
+    Button,FlatList, SafeAreaView, TextInput} from 'react-native'
 import EventoLista from '../../Componentes/EventoItem/index.js'
-import {salvarEvento,pegarEvento,logoutUsuario, pegarTodosEventos} from '../../Utilitarios/Armazenamento'
+import {logoutUsuario} from '../../Utilitarios/Armazenamento'
 
-salvarEvento({'nome': 'conferencia1', 'data': '12/12/2021', 'local':'São Paulo','valor':'R$12,00'})
+import Styles from './style'
+
+import axios from 'axios'
 
 const PaginaInicialLogado=({navigation})=>{
     
-    const [aux,setaux] = useState({})
-    
-    pegarEvento('$conferencia1')
-    .then(response=> {
-        setaux(response)  
+    const [aux,setaux] = useState([])
+    const [pesquisa,setPesquisa] = useState('')
+    useEffect(()=>{
+        const testRequest = async () => {
+            try {
+                const test = await axios.get('https://fake-api-alan.herokuapp.com/eventos') 
+                
+                setaux(test.data)
+          } catch (e) {
+            console.error('TEST ERROR:', e)
+          }
         }
-    )
-    .catch(e=>console.log(e))
+        testRequest()
+    },[])
+
+    const onChangePesquisa = (text) =>{
+        setPesquisa(text)
+    }
 
     const funcaoLogout = () =>{
         logoutUsuario().then(
@@ -27,16 +40,37 @@ const PaginaInicialLogado=({navigation})=>{
        
     }
    
+    const callbackDetalhamento = (item)=>{
+        navigation.navigate('detalhamentoEvento',{item:item})
+    
+    }
+
     return(
-        <View>
-            <Text>
-                PAGINA INICIAL LOGADO
-            </Text>
-            <ScrollView>
-                <EventoLista nome={aux.nome} data={aux.data} local={aux.local} valor={aux.valor}/>
-            </ScrollView>
-            <TouchableOpacity onPress={funcaoLogout} ><Text>Logout</Text></TouchableOpacity>
-        </View>
+        <SafeAreaView style={{flex:1}}>
+            <View>
+                <View style={Styles.rowPesquisa}>
+                <TextInput
+                    placeholder='ex: Simposio'
+                    value={pesquisa}
+                    onChangeText={onChangePesquisa}
+                    style={Styles.inputPesquisa}
+                />
+                <TouchableOpacity style={Styles.buttonPesquisa}>
+                    <Text>{'>'}</Text>
+                </TouchableOpacity>
+                </View>
+                {/*<Button title='Ver todos os eventos' onPress={testRequest}/>*/}
+                
+                <FlatList
+                    data={aux}
+                    renderItem={({item}) =>(<EventoLista  key={item.nome} item={item} callback={callbackDetalhamento} />)}
+                    keyExtractor={item => item.nome}
+                    contentContainerStyle={{ paddingBottom: '20%' }}
+                />
+                
+                <TouchableOpacity onPress={funcaoLogout} ><Text>Logout</Text></TouchableOpacity>
+            </View>
+        </SafeAreaView>
     )
 } 
 export default PaginaInicialLogado

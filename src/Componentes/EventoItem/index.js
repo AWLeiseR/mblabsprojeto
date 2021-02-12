@@ -6,30 +6,23 @@ import {
 
 import Styles from './style'
 
-const EventoItem=({nome,data,local,valor})=>{
-    const [mostrarDetalhes,setMostrarDetalhes]=useState(false)
-    const [textoBotão,setTextoBotão]=useState('Mostrar detalhes')
-    const mudartexto = () =>{
-        if(mudartexto === false){
-            setTextoBotão('Mostrar detalhes')
-        }else{
-            setTextoBotão('Esconder Detalhes')
-        }
-    }
+const EventoItem=({item,callback})=>{
+
     return(
         <View style={Styles.viewPrincipal}>
             <View>
                 <View>
-                    <Text style={Styles.nomeEvento}>{nome}</Text> 
+                    <Text style={Styles.nomeEvento}>{item.nome}</Text> 
                 </View>
                 <View style={Styles.linha}>
-                    <Text>Local: {local}</Text>
-                    <Text>Data: {data}</Text>
+                    <Text>Local: {item.local}</Text>
+                    <Text>Data: {item.data}</Text>
                 </View>
-                <Text style={Styles.precoStyle}>{valor}</Text>
-            </View>   
-            <TouchableOpacity>
-                <Text>{textoBotão}</Text>
+                <Text style={Styles.precoStyle}>R$ {item.valor}</Text>
+            </View>  
+            
+            <TouchableOpacity onPress={()=>callback(item)}>
+                <Text>Ver Mais</Text>
             </TouchableOpacity> 
         </View>
     )
