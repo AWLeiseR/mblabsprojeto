@@ -7,7 +7,8 @@ import PaginaInicialLogado from './Paginas/PaginaInicialLogado/index'
 import CadastroUsuario from './Paginas/CadastroUsuario/index'
 import DetalhamentoEvento from './Paginas/DetalhamentoEvento/index'
 import PerfilUsuario from './Paginas/PerfilUsuario/index'
-
+import CodigoSMS from './Paginas/CodigoSms/index'
+import EfetuarCompra from './Paginas/CompraIngresso/index'
 const Stack = createStackNavigator();
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
                 <Stack.Screen name="cadastroUsuario" component={CadastroUsuario} />
                 <Stack.Screen name="detalhamentoEvento" component={DetalhamentoEvento}/>
                 <Stack.Screen name="perfil" component={PerfilUsuario} />
+                <Stack.Screen name='codigoSms' component={CodigoSMS}/>
+                <Stack.Screen name='compraIngresso' component={EfetuarCompra}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

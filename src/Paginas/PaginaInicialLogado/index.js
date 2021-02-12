@@ -13,14 +13,14 @@ import Styles from './style'
 import axios from 'axios'
 
 const PaginaInicialLogado=({navigation})=>{
-    
+    const [eventos,setEventos] = useState([])
     const [aux,setaux] = useState([])
     const [pesquisa,setPesquisa] = useState('')
     useEffect(()=>{
         const testRequest = async () => {
             try {
                 const test = await axios.get('https://fake-api-alan.herokuapp.com/eventos') 
-                
+                setEventos(test.data)
                 setaux(test.data)
           } catch (e) {
             console.error('TEST ERROR:', e)
@@ -30,6 +30,8 @@ const PaginaInicialLogado=({navigation})=>{
     },[])
 
     const onChangePesquisa = (text) =>{
+        if(text.lenght === 0)
+            setaux(eventos)
         setPesquisa(text)
     }
 
@@ -39,24 +41,33 @@ const PaginaInicialLogado=({navigation})=>{
         )
        
     }
-   
+    const pesquisaEvento = () =>{
+        setaux(eventos.filter(item =>{
+            let nome = item.nome
+            console.log(nome)
+            console.log(pesquisa)
+            console.log( nome.includes(pesquisa)  )  
+            return nome.includes(pesquisa)   
+        }))
+    }
     const callbackDetalhamento = (item)=>{
         navigation.navigate('detalhamentoEvento',{item:item})
     
     }
 
     return(
-        <SafeAreaView style={{flex:1}}>
-            <View>
+        <SafeAreaView style={{width:'100%',flex:1}}>
+            <View style={Styles.viewPrincipal}>
                 <View style={Styles.rowPesquisa}>
                 <TextInput
                     placeholder='ex: Simposio'
                     value={pesquisa}
                     onChangeText={onChangePesquisa}
                     style={Styles.inputPesquisa}
+                    placeholderTextColor='#FFF'
                 />
-                <TouchableOpacity style={Styles.buttonPesquisa}>
-                    <Text>{'>'}</Text>
+                <TouchableOpacity onPress={pesquisaEvento}style={Styles.buttonPesquisa}>
+                    <Text style={Styles.textPesquisa}>{'>'}</Text>
                 </TouchableOpacity>
                 </View>
                 {/*<Button title='Ver todos os eventos' onPress={testRequest}/>*/}

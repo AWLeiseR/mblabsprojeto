@@ -1,4 +1,5 @@
 import {Dimensions, StyleSheet} from 'react-native'
+import { cores } from '../../Utilitarios/constantes'
 
 const width = Dimensions.get('window').width
 
@@ -10,8 +11,8 @@ const Styles = StyleSheet.create({
         flexDirection:'column',
         alignSelf:'center',
         justifyContent:'center',
-        shadowColor:'gray',
-        backgroundColor:'white',
+        
+        backgroundColor:'rgba(255,255, 255, 0.1)',
         borderRadius:20,
         marginBottom:5,
         padding:10
@@ -19,7 +20,8 @@ const Styles = StyleSheet.create({
     nomeEvento:{
         fontSize:width/16,
         fontWeight:'bold',
-        textAlign:'center'
+        textAlign:'center',
+        color:cores.branco
     },
     linha:{
         width:width/1.5,
@@ -29,10 +31,32 @@ const Styles = StyleSheet.create({
         alignSelf:'center'
         
     },
+    infoEvento:{
+        fontSize:15,
+        color:cores.branco
+    },
     precoStyle:{
         fontSize:width/20,
-        color:'red',
+        color:cores.branco,
         textAlign:'center'
+    },
+    
+    verMaisView:{
+        display:'flex',
+        alignItems:'center'
+    },
+    verMaisBotao:{
+        width:width/4,
+        borderRadius:5,
+        borderColor:cores.branco,
+        borderWidth:1,
+
+    },
+    verMaisText:{
+        textAlign:'center',
+        color:cores.amarelo,
+        fontSize:15,
+        fontWeight:'bold'
     }
 })
 export default Styles

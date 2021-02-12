@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import {View,Text,TextInput} from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import {View,Text,TextInput,
+    TouchableOpacity} from 'react-native'
+
 
 const PerfilUsuario=()=>{
     const [editarPerfil,setEditarPerfil] = useState(false)
@@ -35,38 +36,10 @@ const PerfilUsuario=()=>{
         
     }
 
-    const displayTela = ()=>{
-        if(editarPerfil){
-            return(
-                <View>
-                    <Text>Editar perfil do usuário</Text>
-                    <View>
-                        <TextInput
-                            value={Nome}
-                            onChangeText={onChangeNome}/>
-
-                        <TextInput
-                            value={cpf}/>
-
-                        <TextInput
-                            value={email}/>
-                        
-                        <TextInput 
-                            value={endereco}/>
-                        <TextInput
-                            value={cargo}/>
-                        
-                        <TextInput
-                            value={senha}/>
-                        
-                        <TextInput 
-                            value={confirmarSenha}/>
-                    </View>
-                </View>
-            )
-        }else{
-            return(
-                <View>
+  
+    return(
+        <View>
+            <View>
                     <Text>
                     Perfil do usuário
                     </Text>
@@ -80,16 +53,8 @@ const PerfilUsuario=()=>{
                     <TouchableOpacity>
                         <Text>Historico de Compras</Text>
                     </TouchableOpacity>
-                </View> 
-            )
-        }
-    }
-    return(
-        <View>
-            {displayTela()}
-            <TouchableOpacity onPress={()=>setEditarPerfil(true)}>
-                <Text>Editar perfil</Text>
-            </TouchableOpacity>
+                </View>
+            
         </View>
     )
 }

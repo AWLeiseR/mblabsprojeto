@@ -5,17 +5,10 @@ import {
     TextInput,
     Button,
     Alert} from 'react-native'
-    
-
 
 import Styles from './style'
 
-
-
 import axios from 'axios'
-import confirmarTelefoneTela from '../../Componentes/CodigoSms'
-
-
 
 const CadastroUsuario=({navigation})=>{
     const [nome, setNome]=useState('')
