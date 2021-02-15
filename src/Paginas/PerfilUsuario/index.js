@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {View,Text,TextInput,
     TouchableOpacity} from 'react-native'
-
-
-const PerfilUsuario=()=>{
-    const [editarPerfil,setEditarPerfil] = useState(false)
+import Styles from './style'
+import BottomBar from '../../Componentes/bottomBar'
+import {resgatarMemoria} from '../../Utilitarios/Armazenamento'
+const PerfilUsuario=({navigation})=>{
+    const [usuario,setUsuario] = useState({})
     const [nome, setNome]=useState('')
     const [email, setEmail]=useState('')
     const [endereco, setEndereco]=useState('')
@@ -12,49 +13,43 @@ const PerfilUsuario=()=>{
     const [senha, setSenha]=useState('')
     const [confirmarSenha, setConfirmarSenha]=useState('')
 
-    //manipulador das varivaeis
-    const onChangeNome=(text)=>{
-        setNome(text)
+    useEffect(()=>{
+        resgatarMemoria()
+        .then(res => setUsuario(res))
+        .catch(e=>console.log(e))
+    },[])
+    console.log(usuario)
+    const callback=()=>{
+        navigation.navigate('paginaInicialLogado')
     }
-    const onChangeEmail=(text)=>{
-        setEmail(text)
+    const callbackPerfil=()=>{
+        navigation.navigate('perfil')
     }
-    const onChangeCpf=(text)=>{
-        setCpf(text)
+    const callbackSair=()=>{
+        navigation.navigate('paginaInicial')
     }
-    const onChangeEndereço=(text)=>{
-        setEndereço(text)
-    }
-    const onChangeSenha=(text)=>{
-        setSenha(text)
-    }
-    const onChangeConfirmarSenha=(text)=>{
-        setConfirmarSenha(text)
-    }
-
-    const salvarAlteracoes = () =>{
-        
-    }
-
-  
     return(
-        <View>
-            <View>
-                    <Text>
-                    Perfil do usuário
-                    </Text>
+        <View style={Styles.viewPrincipal}>
+                <Text>Perfil do usuário</Text>
+            <View style={Styles.viewSecundaria}>
+                    
                     <View>
-                        <Text>Nome</Text>
-                        <Text>CPF</Text>
-                        <Text>Email</Text>
-                        <Text>Endereço</Text>
-                        <Text>Cargo</Text>
+                        <Text style={Styles.labelInfoPrefil}>Nome</Text>
+                        <Text>{usuario.nome}</Text>
+                        <Text style={Styles.labelInfoPrefil}>CPF</Text>
+                        <Text>{usuario.cpf}</Text>
+                        <Text style={Styles.labelInfoPrefil}>Email</Text>
+                        <Text>{usuario.email}</Text>
+                        <Text style={Styles.labelInfoPrefil}>Endereço</Text>
+                        <Text>{usuario.endereco}</Text>
+                        <Text style={Styles.labelInfoPrefil}>Telefone</Text>
+                        <Text>{usuario.tel}</Text>
                     </View>
                     <TouchableOpacity>
                         <Text>Historico de Compras</Text>
                     </TouchableOpacity>
                 </View>
-            
+                <BottomBar callbackEventos={callback} callbackProfile={callbackPerfil} callbackSair={callbackSair}/>
         </View>
     )
 }

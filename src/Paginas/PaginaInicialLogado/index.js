@@ -6,22 +6,41 @@ import {
     TouchableOpacity,
     Button,FlatList, SafeAreaView, TextInput} from 'react-native'
 import EventoLista from '../../Componentes/EventoItem/index.js'
-import {logoutUsuario} from '../../Utilitarios/Armazenamento'
+
 
 import Styles from './style'
 
 import axios from 'axios'
 
+import bottomBar from '../../Componentes/bottomBar/index'
+import BottomBar from '../../Componentes/bottomBar/index'
+import { removerMemoria } from '../../Utilitarios/Armazenamento.js'
+
+const criterioBusca={
+    NOME:1,
+    LOCAL:2,
+    DATA:3
+}
+
+const estadoPagina={
+    CARREGANDO:1,
+    PRONTA:2
+}
+
 const PaginaInicialLogado=({navigation})=>{
     const [eventos,setEventos] = useState([])
     const [aux,setaux] = useState([])
     const [pesquisa,setPesquisa] = useState('')
+    const [criterio,setCriterio] = useState(criterioBusca.NOME)
+    const [pagina,setPagina] = useState(estadoPagina.CARREGANDO)
+
     useEffect(()=>{
         const testRequest = async () => {
             try {
                 const test = await axios.get('https://fake-api-alan.herokuapp.com/eventos') 
                 setEventos(test.data)
                 setaux(test.data)
+                setPagina(estadoPagina.PRONTA)
           } catch (e) {
             console.error('TEST ERROR:', e)
           }
@@ -34,53 +53,115 @@ const PaginaInicialLogado=({navigation})=>{
             setaux(eventos)
         setPesquisa(text)
     }
-
-    const funcaoLogout = () =>{
-        logoutUsuario().then(
-            navigation.navigate('paginaInicial')
-        )
-       
-    }
+    
     const pesquisaEvento = () =>{
+        
         setaux(eventos.filter(item =>{
-            let nome = item.nome
-            console.log(nome)
-            console.log(pesquisa)
-            console.log( nome.includes(pesquisa)  )  
-            return nome.includes(pesquisa)   
+            let dado 
+            switch(criterio){
+                case criterioBusca.LOCAL:
+                    dado = item.local
+                    break
+                case criterioBusca.DATA:
+                    dado = item.data
+                    break
+                default:
+                    dado = item.nome
+                    break
+            }
+            return dado.includes(pesquisa)   
         }))
     }
+
+    const onPressBotaoCriterio = (botao) =>{
+        setCriterio(botao)
+    }
+
     const callbackDetalhamento = (item)=>{
         navigation.navigate('detalhamentoEvento',{item:item})
     
     }
 
-    return(
-        <SafeAreaView style={{width:'100%',flex:1}}>
-            <View style={Styles.viewPrincipal}>
-                <View style={Styles.rowPesquisa}>
-                <TextInput
-                    placeholder='ex: Simposio'
-                    value={pesquisa}
-                    onChangeText={onChangePesquisa}
-                    style={Styles.inputPesquisa}
-                    placeholderTextColor='#FFF'
-                />
-                <TouchableOpacity onPress={pesquisaEvento}style={Styles.buttonPesquisa}>
-                    <Text style={Styles.textPesquisa}>{'>'}</Text>
-                </TouchableOpacity>
+    const addStyle = (status)=>{
+        if(status !== criterio)
+            return Styles.botaoNormal
+        else    
+            return Styles.botaoPrescionado
+    }
+    const conteudoPagina = () =>{
+        if(pagina === estadoPagina.PRONTA){
+            return(
+                
+                    <FlatList
+                        data={aux}
+                        renderItem={({item}) =>(<EventoLista  key={item.nome} item={item} callback={callbackDetalhamento} />)}
+                        keyExtractor={item => item.nome}
+                        contentContainerStyle={{ paddingBottom: '20%' }}
+                    /> 
+            )
+        }else{
+            return(
+            
+                <View style={Styles.carregnadoView}>
+                    <Text style={Styles.carregnadoViewText}>Carregando eventos...</Text>
                 </View>
-                {/*<Button title='Ver todos os eventos' onPress={testRequest}/>*/}
                 
-                <FlatList
-                    data={aux}
-                    renderItem={({item}) =>(<EventoLista  key={item.nome} item={item} callback={callbackDetalhamento} />)}
-                    keyExtractor={item => item.nome}
-                    contentContainerStyle={{ paddingBottom: '20%' }}
-                />
+            )
+        }
+    }
+
+    const callback=()=>{
+        navigation.navigate('paginaInicialLogado')
+    }
+    const callbackPerfil=()=>{
+        navigation.navigate('perfil')
+    }
+    const callbackSair=()=>{
+        removerMemoria()
+        .then(()=>navigation.navigate('paginaInicial'))
+        
+    }
+    return(
+        <SafeAreaView style={{flex:1}}>
+            <View style={Styles.viewPrincipal}>
+                <View>
+                        <View style={Styles.rowPesquisa}>
+                            <TextInput
+                                placeholder='ex: Simposio'
+                                value={pesquisa}
+                                onChangeText={onChangePesquisa}
+                                style={Styles.inputPesquisa}
+                                placeholderTextColor='#FFF'
+                            />
+                            <View style={Styles.viewButtonPesquisa}>
+                                <TouchableOpacity onPress={pesquisaEvento}style={Styles.buttonPesquisa}>
+                                    <Text style={Styles.textPesquisa}>{'>'}</Text>
+                                </TouchableOpacity>
+                            </View>
+
+                        </View>
+                        <View style={Styles.linhaBotoesPesquisa}>
+                            <TouchableOpacity style={[Styles.botaoPesquisaGeral,addStyle(criterioBusca.NOME)]}
+                                onPress={() => onPressBotaoCriterio(criterioBusca.NOME)}>
+                                <Text style={[Styles.textoBotaoPadrao,Styles.textoBotanoNormal]}>Nome</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={[Styles.botaoPesquisaGeral,addStyle(criterioBusca.LOCAL)]}
+                                onPress={() => onPressBotaoCriterio(criterioBusca.LOCAL)}>
+                                <Text style={[Styles.textoBotaoPadrao,Styles.textoBotanoNormal]}>Local</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={[Styles.botaoPesquisaGeral,addStyle(criterioBusca.DATA)]}
+                                onPress={() => onPressBotaoCriterio(criterioBusca.DATA)}>
+                                <Text style={[Styles.textoBotaoPadrao,Styles.textoBotanoNormal]}>Data</Text>
+                            </TouchableOpacity>
+                        </View>
                 
-                <TouchableOpacity onPress={funcaoLogout} ><Text>Logout</Text></TouchableOpacity>
+                        
+                    </View>
+            {conteudoPagina()}
+            <BottomBar callbackEventos={callback} callbackProfile={callbackPerfil} callbackSair={callbackSair}/>
+            
             </View>
+           
         </SafeAreaView>
     )
 } 

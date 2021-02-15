@@ -6,7 +6,7 @@ import Styles from './style'
 
 
 const EfetuarCompra=()=>{
-    const [numeroCartao,setNumeroCartao] = useState(false)
+    const [numeroCartao,setNumeroCartao] = useState('')
     const [nomeTitular, setNomeTitular]=useState('')
     const [Validade, setValidade]=useState('')
     const [CodSeguranca, setCodSeguranca]=useState('')

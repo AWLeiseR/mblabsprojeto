@@ -42,7 +42,6 @@ const Styles = StyleSheet.create({
         color:cores.branco,
         fontWeight:'bold'
     },
-    
     fraseMeio:{
         color:cores.amarelo,
         fontWeight:'700',

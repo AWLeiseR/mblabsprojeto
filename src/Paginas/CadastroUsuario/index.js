@@ -3,12 +3,15 @@ import {
     View,
     Text,
     TextInput,
-    Button,
-    Alert} from 'react-native'
+    TouchableOpacity,
+    Alert,
+    KeyboardAvoidingView,
+    ScrollView} from 'react-native'
 
 import Styles from './style'
 
 import axios from 'axios'
+
 
 const CadastroUsuario=({navigation})=>{
     const [nome, setNome]=useState('')
@@ -18,7 +21,7 @@ const CadastroUsuario=({navigation})=>{
     const [tel,setTel]=useState('')
     const [senha, setSenha]=useState('')
     const [confirmarSenha, setConfirmarSenha]=useState('')
-    const [confirmarTela,setConfirmarTela] = useState(false)
+    
 
 
     //manipulador das varivaeis
@@ -29,11 +32,27 @@ const CadastroUsuario=({navigation})=>{
         setEmail(text)
     }
     const onChangeCpf=(text)=>{
-        setCpf(text)
+
+        if(cpf.length === 2 && text.length === 3)
+            setCpf(text + '.')
+        else if(cpf.length === 4 && text.length === 3)
+            setCpf(text)
+        else if(cpf.length === 6 && text.length === 7)
+            setCpf(text + '.')
+        else if(cpf.length === 8 && text.length === 7)
+            setCpf(text)
+        else if(cpf.length === 10 && text.length === 11)
+            setCpf(text + '-')
+        else if(cpf.length === 12 && text.length === 11)
+            setCpf(text)
+        else
+            setCpf(text)
+    
     }
     const onChangeTel=(text)=>{
-        if(text.length<=11)
+        
             setTel(text)
+            
     }
     const onChangeendereco=(text)=>{
         setEndereco(text)
@@ -47,6 +66,7 @@ const CadastroUsuario=({navigation})=>{
 
     //manipulador de cadastro
     const onClickButtonCadastrar=()=>{
+        console.log('entrou')
         if(nome === '' || email === '' || endereco === ''
             || cpf === '' || senha ==='' || confirmarSenha === '' || tel === ''){
                 Alert.alert('Complete todos os campos do cadastro.')
@@ -60,21 +80,16 @@ const CadastroUsuario=({navigation})=>{
                     if(size !== 0){
                         Alert.alert('O email já está em uso!')
                     }else{
-                        let usuario = {nome,email,endereco,cpf,senha,historicocompra:[],cargo:'comum'}
-                        axios.post('https://fake-api-alan.herokuapp.com/usuarios',{usuario})
-                        .then(response=>{
-                            Alert.alert('Cadastro efetuado com sucesso! Enviamos um código de confirmação para seu número de celular.')
+                        let usuario = {nome,email,tel,endereco,cpf,senha}
                             setNome('')
                             setEmail('')
+                            setTel('')
                             setEndereco('')
                             setSenha('')
                             setCpf('')
                             setConfirmarSenha('')
-                            mostrarTelaComfiramcao()
-                            
-                        })
-                        .catch(e=>Alert.alert('Ocorreu um erro no cadastro, tente mais tarde.'))
-                    
+                            navigation.navigate('codigoSms',{usuario,pagina:1})
+
                     }
             })
             .catch(e=>{
@@ -84,96 +99,99 @@ const CadastroUsuario=({navigation})=>{
 
     }
 
-    const mostrarTelaComfiramcao = () =>{
-        setConfirmarTela(!confirmarTela)
-    }
-
-    const callback = () => {
-        setConfirmarTela(false)
-        navigation.navigate('paginaInicialLogado')
-    }
-
     return(
-        <View style={Styles.viewPrincipal}>
-            <View>
-                <Text> Cadastro de Usuario</Text>
-                
-                <View style={Styles.viewCadastro}>
-                    <View>
-                        <Text>Nome</Text>
-                        <TextInput
-                            placeholder='ex: João da Silva'
-                            style={Styles.inputStyle}
-                            onChangeText={text => onChangeNome(text)}
-                            value={nome}
-                        />
-                    </View>
+        <KeyboardAvoidingView behavior='padding' style={{flex:1,alignItems: "center",
+        justifyContent: "center"}}>
+            
+            <View style={Styles.viewPrincipal}>
+                <View>
+                    <Text style={Styles.tituloPagina}> Cadastro de Usuário</Text>
+                    
+                    <View style={Styles.viewCadastro}>
+                        <View>
+                            <Text style={Styles.labelsInput}>Nome</Text>
+                            <TextInput
+                                placeholder='ex: João da Silva'
+                                style={Styles.inputStyle}
+                                onChangeText={text => onChangeNome(text)}
+                                value={nome}
+                            />
+                        </View>
 
-                    <View>
-                        <Text>Email</Text>
-                        <TextInput
-                            placeholder='ex: joaosilva@gmail.com'
-                            style={Styles.inputStyle}
-                            onChangeText={text => onChangeEmail(text)}
-                            value={email}
-                        />
-                    </View>
-                    
-                    <View>
-                        <Text>endereco</Text>
-                        <TextInput
-                            placeholder='ex: Rua Campinas, 22'
-                            style={Styles.inputStyle}
-                            onChangeText={text => onChangeendereco(text)}
-                            value={endereco}
-                        />
-                    </View>
-                    
-                    <View>
-                        <Text>CPF</Text>
-                        <TextInput
-                            placeholder='000.000.000-00'
-                            style={Styles.inputStyle}
-                            onChangeText={text => onChangeCpf(text)}
-                            value={cpf}
-                        />
-                    </View>
+                        <View>
+                            <Text  style={Styles.labelsInput}>Email</Text>
+                            <TextInput
+                                placeholder='ex: joaosilva@gmail.com'
+                                keyboardType='email-address'
+                                style={Styles.inputStyle}
+                                onChangeText={text => onChangeEmail(text)}
+                                value={email}
+                            />
+                        </View>
+                        
+                        <View>
+                            <Text style={Styles.labelsInput}>Endereco</Text>
+                            <TextInput
+                                placeholder='ex: Rua Campinas, 22'
+                                style={Styles.inputStyle}
+                                onChangeText={text => onChangeendereco(text)}
+                                value={endereco}
+                            />
+                        </View>
+                        
+                        <View>
+                            <Text style={Styles.labelsInput}>CPF</Text>
+                            <TextInput
+                                placeholder='000.000.000-00'
+                                style={Styles.inputStyle}
+                                keyboardType='numeric'
+                                onChangeText={text => onChangeCpf(text)}
+                                value={cpf}
+                                maxLength={14}
+                            />
+                        </View>
 
-                    <View>
-                        <Text>Telefone</Text>
-                        <TextInput
-                            placeholder='43999999999'
-                            style={Styles.inputStyle}
-                            onChangeText={text => onChangeTel(text)}
-                            value={tel}
-                        />
+                        <View>
+                            <Text style={Styles.labelsInput}>Telefone</Text>
+                            <TextInput
+                                placeholder='43999999999'
+                                style={Styles.inputStyle}
+                                keyboardType='numeric'
+                                onChangeText={text => onChangeTel(text)}
+                                value={tel}
+                                maxLength={11}
+                            />
+                        </View>
+                        
+                        <View>
+                            <Text style={Styles.labelsInput}>Senha</Text>
+                            <TextInput
+                                placeholder='Insira sua senha secreta'
+                                style={Styles.inputStyle}
+                                onChangeText={text => onChangeSenha(text)}
+                                value={senha}
+                            />
+                        </View>            
+                        
+                        <View>
+                            <Text style={Styles.labelsInput}>Confirmar Senha</Text>
+                            <TextInput
+                                placeholder='Repita sua senha secreta'
+                                style={Styles.inputStyle}
+                                onChangeText={text => onChangeConfirmarSenha(text)}
+                                value={confirmarSenha}
+                            />
+                        </View>
                     </View>
+                    <TouchableOpacity onPress={onClickButtonCadastrar} 
+                        style={Styles.cadastrarBotao}>
+                        <Text style={Styles.cadastrarBotaoText}>Cadastrar</Text>
+                    </TouchableOpacity>
                     
-                    <View>
-                        <Text>Senha</Text>
-                        <TextInput
-                            placeholder='Insira sua senha secreta'
-                            style={Styles.inputStyle}
-                            onChangeText={text => onChangeSenha(text)}
-                            value={senha}
-                        />
-                    </View>            
-                    
-                    <View>
-                        <Text>Confirmar Senha</Text>
-                        <TextInput
-                            placeholder='Repita sua senha secreta'
-                            style={Styles.inputStyle}
-                            onChangeText={text => onChangeConfirmarSenha(text)}
-                            value={confirmarSenha}
-                        />
-                    </View>
                 </View>
-                <Button onPress={onClickButtonCadastrar}
-                    title="Cadastrar"
-                    color="#841584" />
             </View>
-        </View>
+            
+        </KeyboardAvoidingView>
     )
 }
 export default CadastroUsuario
