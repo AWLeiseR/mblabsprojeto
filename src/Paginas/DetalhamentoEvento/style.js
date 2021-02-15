@@ -12,10 +12,10 @@ const Styles = StyleSheet.create({
         display:'flex',
         alignItems: 'center',
         padding:5,
-        backgroundColor:cores.roxoEscuro
+        backgroundColor:cores.cinza2
     },
     nomeEvento:{
-        color:cores.amarelo,
+        color:cores.roxoLogo,
         marginTop:10,
         fontWeight:'bold',
         fontSize:35,
@@ -33,12 +33,12 @@ const Styles = StyleSheet.create({
         
     },
     labelsEvento:{
-        color:cores.amarelo,
+        color:cores.roxoLogo,
         fontWeight:'bold',
         fontSize:20
     },
     infoEvento:{
-        color:cores.branco,
+        color:cores.cinza,
         fontSize:15,
         paddingLeft:30
     },
@@ -47,19 +47,18 @@ const Styles = StyleSheet.create({
         flexDirection:'row'
     },
     comprarBotao:{
-        width:width/3,
-        height:40,
+        width:width/2,
+        height:50,
         display:'flex',
         justifyContent:'center',
         alignItems:'center',
-        borderWidth:2,
-        borderColor:"#fff",
-        borderRadius:10
-
+        backgroundColor:cores.roxoLogo,
+        borderRadius:10,
+        backgroundColor:cores.roxoLogo
     },
     comprarBotaoText:{
         fontSize:20,
-        color:cores.amarelo
+        color:cores.branco
     }
 })
 

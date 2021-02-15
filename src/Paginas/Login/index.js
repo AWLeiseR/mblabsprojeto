@@ -50,22 +50,27 @@ const Login =({navigation})=>{
     return(
         <KeyboardAvoidingView>
             <View style={Styles.viewPrincipal}>
+                <Text style={Styles.tituloPafina}>Login</Text>
+                <Text style={Styles.frasePagina}>Insira seu email cadastrado no campo abaixo</Text>
                 <View style={Styles.viewSecundaria}>
-                    <View>
+                    
+                    <View style={Styles.viewInputEmail}>
                         <Text style={Styles.labelInputEmail}>Email</Text>
                         <TextInput
                             style={Styles.loginInput}
                             placeholder='ex: carlosferreira@gmail.com'
-                            placeholderColor={cores.cinzaClaro}
+                            placeholderTextColor='#999'
                             valeu={email}
                             onChangeText={onChangeEmail}/>
                     </View>
-                    
+                    <View style={Styles.viewBotaoEntrar}>
                         <TouchableOpacity 
                             style={Styles.botaoLogin}
                             onPress={verificarEmail}>
                             <Text style={Styles.botaoLoginText}>Login</Text>
                         </TouchableOpacity>
+                    </View>
+                        
                 </View>
                 
             </View>

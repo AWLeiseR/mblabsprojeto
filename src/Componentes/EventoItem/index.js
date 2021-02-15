@@ -14,11 +14,15 @@ const EventoItem=({item,callback})=>{
                 <View>
                     <Text style={Styles.nomeEvento}>{item.nome}</Text> 
                 </View>
-                <View style={Styles.linha}>
-                    <Text style={Styles.infoEvento}>Local: {item.local}</Text>
-                    <Text style={Styles.infoEvento}>Data: {item.data}</Text>
+                <View style={Styles.coluna}>
+                    <View>
+                        <Text style={Styles.infoEvento}>Local: {item.local}</Text>
+                        <Text style={Styles.infoEvento}>Data: {item.data}</Text>
+                    </View>
+                    
+                    <Text style={Styles.precoStyle}>R$ {item.valor}</Text>
                 </View>
-                <Text style={Styles.precoStyle}>R$ {item.valor}</Text>
+                
             </View>  
             <View style={Styles.verMaisView}>
                 <TouchableOpacity style={Styles.verMaisBotao} onPress={()=>callback(item)}>

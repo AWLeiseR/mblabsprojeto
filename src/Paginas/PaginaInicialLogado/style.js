@@ -10,7 +10,7 @@ const Styles = StyleSheet.create({
         width:'100%',
         height,
         paddingBottom:10,
-        backgroundColor:cores.roxoEscuro
+        backgroundColor:cores.cinza2
     },
     rowPesquisa:{
         height:35,
@@ -28,10 +28,10 @@ const Styles = StyleSheet.create({
         height:'95%',
         borderRadius:5,
         borderWidth:1,
-        borderColor:cores.branco,
+        borderColor:cores.roxoLogo,
         margin:1,
-        fontSize:20,
-        color:cores.branco
+        fontSize:15,
+        color:cores.roxoLogo
         
     },
     viewButtonPesquisa:{
@@ -51,8 +51,8 @@ const Styles = StyleSheet.create({
         
     },
     textPesquisa:{
-        color:cores.branco,
-        fontSize:20,
+        color:cores.roxoLogo,
+        fontSize:30,
         fontWeight:'bold'
     },
     linhaBotoesPesquisa:{
@@ -73,21 +73,21 @@ const Styles = StyleSheet.create({
         justifyContent:'center'
     },
     botaoPrescionado:{
-        backgroundColor:cores.cinzaClaro,
+        backgroundColor:cores.roxoLogo,
     },
     botaoNormal:{
         borderWidth:1,
-        borderColor:cores.branco,
+        borderColor:cores.roxoLogo,
     },
     
     textoBotaoPadrao:{
         textAlign:'center'
     },
-    textoBotaoPrecionado:{
-        color:cores.roxoEscuro
-    },
-    textoBotanoNormal:{
+    textoBotaoPrescionado:{
         color:cores.branco
+    },
+    textoBotaoNormal:{
+        color:cores.roxoLogo
     },
     carregnadoView:{
         height:height/1.5,

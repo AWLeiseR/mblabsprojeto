@@ -88,6 +88,14 @@ const PaginaInicialLogado=({navigation})=>{
         else    
             return Styles.botaoPrescionado
     }
+
+    const addStyleText = (status)=>{
+        if(status !== criterio)
+            return Styles.textoBotaoNormal
+        else    
+            return Styles.textoBotaoPrescionado
+    }
+
     const conteudoPagina = () =>{
         if(pagina === estadoPagina.PRONTA){
             return(
@@ -131,7 +139,7 @@ const PaginaInicialLogado=({navigation})=>{
                                 value={pesquisa}
                                 onChangeText={onChangePesquisa}
                                 style={Styles.inputPesquisa}
-                                placeholderTextColor='#FFF'
+                                placeholderTextColor='#67519f'
                             />
                             <View style={Styles.viewButtonPesquisa}>
                                 <TouchableOpacity onPress={pesquisaEvento}style={Styles.buttonPesquisa}>
@@ -143,15 +151,15 @@ const PaginaInicialLogado=({navigation})=>{
                         <View style={Styles.linhaBotoesPesquisa}>
                             <TouchableOpacity style={[Styles.botaoPesquisaGeral,addStyle(criterioBusca.NOME)]}
                                 onPress={() => onPressBotaoCriterio(criterioBusca.NOME)}>
-                                <Text style={[Styles.textoBotaoPadrao,Styles.textoBotanoNormal]}>Nome</Text>
+                                <Text style={[Styles.textoBotaoPadrao,addStyleText(criterioBusca.NOME)]}>Nome</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={[Styles.botaoPesquisaGeral,addStyle(criterioBusca.LOCAL)]}
                                 onPress={() => onPressBotaoCriterio(criterioBusca.LOCAL)}>
-                                <Text style={[Styles.textoBotaoPadrao,Styles.textoBotanoNormal]}>Local</Text>
+                                <Text style={[Styles.textoBotaoPadrao,addStyleText(criterioBusca.LOCAL)]}>Local</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={[Styles.botaoPesquisaGeral,addStyle(criterioBusca.DATA)]}
                                 onPress={() => onPressBotaoCriterio(criterioBusca.DATA)}>
-                                <Text style={[Styles.textoBotaoPadrao,Styles.textoBotanoNormal]}>Data</Text>
+                                <Text style={[Styles.textoBotaoPadrao,addStyleText(criterioBusca.DATA)]}>Data</Text>
                             </TouchableOpacity>
                         </View>
                 

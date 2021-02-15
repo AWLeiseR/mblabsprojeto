@@ -12,10 +12,10 @@ const Styles = StyleSheet.create({
         display:'flex',
         alignItems: 'center',
         padding:5,
-        backgroundColor:cores.roxoEscuro
+        backgroundColor:cores.cinza2
     },
     tituloPagina:{
-        color:cores.amarelo,
+        color:cores.roxoLogo,
         fontSize:30,
         textAlign:'center',
         fontWeight:'bold'
@@ -23,26 +23,29 @@ const Styles = StyleSheet.create({
     viewInputInfoCartao:{
         width:'90%',
         height:height/1.5,
+        display:'flex',
+        justifyContent:'center'
         
     },
     inputInfoCartao:{
-        color:cores.branco,
+        color:cores.roxoLogo,
         paddingBottom:5,
-        borderBottomColor:cores.branco,
+        borderBottomColor:cores.roxoLogo,
         borderBottomWidth:1,
         fontSize:20
     },
     botaoFinalizar:{
         width:width/2,
-        borderRadius:5,
-        borderWidth:1,
-        borderColor:cores.branco,
+        height:40,
+        borderRadius:20,
+        
+        backgroundColor:cores.roxoLogo,
         display:'flex',
         justifyContent:'center',
         alignItems:'center'
     },
     botaoFinalizarText:{
-        color:cores.amarelo,
+        color:cores.branco,
         fontWeight:'bold',
         fontSize:20
     }

@@ -12,6 +12,7 @@ import Styles from './style'
 
 import axios from 'axios'
 
+import {cores} from '../../Utilitarios/constantes'
 
 const CadastroUsuario=({navigation})=>{
     const [nome, setNome]=useState('')
@@ -100,18 +101,23 @@ const CadastroUsuario=({navigation})=>{
     }
 
     return(
-        <KeyboardAvoidingView behavior='padding' style={{flex:1,alignItems: "center",
+        <KeyboardAvoidingView behavior='height' style={{flex:1,alignItems: "center",
         justifyContent: "center"}}>
             
             <View style={Styles.viewPrincipal}>
-                <View>
-                    <Text style={Styles.tituloPagina}> Cadastro de Usuário</Text>
+
+                <Text style={Styles.tituloPagina}> Cadastro de Usuário</Text>
+
+                <View >
                     
-                    <View style={Styles.viewCadastro}>
-                        <View>
+                    
+                    <View style={Styles.viewCadastro} >
+
+                        <View >
                             <Text style={Styles.labelsInput}>Nome</Text>
                             <TextInput
                                 placeholder='ex: João da Silva'
+                                placeholderTextColor='#999'
                                 style={Styles.inputStyle}
                                 onChangeText={text => onChangeNome(text)}
                                 value={nome}
@@ -122,6 +128,7 @@ const CadastroUsuario=({navigation})=>{
                             <Text  style={Styles.labelsInput}>Email</Text>
                             <TextInput
                                 placeholder='ex: joaosilva@gmail.com'
+                                placeholderTextColor='#999'
                                 keyboardType='email-address'
                                 style={Styles.inputStyle}
                                 onChangeText={text => onChangeEmail(text)}
@@ -133,6 +140,7 @@ const CadastroUsuario=({navigation})=>{
                             <Text style={Styles.labelsInput}>Endereco</Text>
                             <TextInput
                                 placeholder='ex: Rua Campinas, 22'
+                                placeholderTextColor='#999'
                                 style={Styles.inputStyle}
                                 onChangeText={text => onChangeendereco(text)}
                                 value={endereco}
@@ -143,6 +151,7 @@ const CadastroUsuario=({navigation})=>{
                             <Text style={Styles.labelsInput}>CPF</Text>
                             <TextInput
                                 placeholder='000.000.000-00'
+                                placeholderTextColor='#999'
                                 style={Styles.inputStyle}
                                 keyboardType='numeric'
                                 onChangeText={text => onChangeCpf(text)}
@@ -155,6 +164,7 @@ const CadastroUsuario=({navigation})=>{
                             <Text style={Styles.labelsInput}>Telefone</Text>
                             <TextInput
                                 placeholder='43999999999'
+                                placeholderTextColor='#999'
                                 style={Styles.inputStyle}
                                 keyboardType='numeric'
                                 onChangeText={text => onChangeTel(text)}
@@ -167,6 +177,8 @@ const CadastroUsuario=({navigation})=>{
                             <Text style={Styles.labelsInput}>Senha</Text>
                             <TextInput
                                 placeholder='Insira sua senha secreta'
+                                secureTextEntry={true}
+                                placeholderTextColor='#999'
                                 style={Styles.inputStyle}
                                 onChangeText={text => onChangeSenha(text)}
                                 value={senha}
@@ -177,11 +189,14 @@ const CadastroUsuario=({navigation})=>{
                             <Text style={Styles.labelsInput}>Confirmar Senha</Text>
                             <TextInput
                                 placeholder='Repita sua senha secreta'
+                                secureTextEntry={true}
+                                placeholderTextColor='#999'
                                 style={Styles.inputStyle}
                                 onChangeText={text => onChangeConfirmarSenha(text)}
                                 value={confirmarSenha}
                             />
                         </View>
+
                     </View>
                     <TouchableOpacity onPress={onClickButtonCadastrar} 
                         style={Styles.cadastrarBotao}>

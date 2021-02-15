@@ -30,24 +30,22 @@ const PerfilUsuario=({navigation})=>{
     }
     return(
         <View style={Styles.viewPrincipal}>
-                <Text>Perfil do usuário</Text>
+                <Text style={Styles.tituloPagina}>Perfil do usuário</Text>
             <View style={Styles.viewSecundaria}>
                     
                     <View>
-                        <Text style={Styles.labelInfoPrefil}>Nome</Text>
-                        <Text>{usuario.nome}</Text>
-                        <Text style={Styles.labelInfoPrefil}>CPF</Text>
-                        <Text>{usuario.cpf}</Text>
-                        <Text style={Styles.labelInfoPrefil}>Email</Text>
-                        <Text>{usuario.email}</Text>
-                        <Text style={Styles.labelInfoPrefil}>Endereço</Text>
-                        <Text>{usuario.endereco}</Text>
-                        <Text style={Styles.labelInfoPrefil}>Telefone</Text>
-                        <Text>{usuario.tel}</Text>
+                        <Text style={Styles.labelInfoPrefil}>Nome:</Text>
+                        <Text style={Styles.infoPerfil}>{usuario.nome}</Text>
+                        <Text style={Styles.labelInfoPrefil}>CPF:</Text>
+                        <Text style={Styles.infoPerfil}>{usuario.cpf}</Text>
+                        <Text style={Styles.labelInfoPrefil}>Email:</Text>
+                        <Text style={Styles.infoPerfil}>{usuario.email}</Text>
+                        <Text style={Styles.labelInfoPrefil}>Endereço:</Text>
+                        <Text style={Styles.infoPerfil}>{usuario.endereco}</Text>
+                        <Text style={Styles.labelInfoPrefil}>Telefone:</Text>
+                        <Text style={Styles.infoPerfil}>{usuario.tel}</Text>
                     </View>
-                    <TouchableOpacity>
-                        <Text>Historico de Compras</Text>
-                    </TouchableOpacity>
+                    
                 </View>
                 <BottomBar callbackEventos={callback} callbackProfile={callbackPerfil} callbackSair={callbackSair}/>
         </View>

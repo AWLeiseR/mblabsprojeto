@@ -23,7 +23,7 @@ function App() {
                 <Stack.Screen name="detalhamentoEvento" component={DetalhamentoEvento}/>
                 <Stack.Screen name="perfil" component={PerfilUsuario} />
                 <Stack.Screen name='codigoSms' component={CodigoSMS}/>
-                <Stack.Screen name={'login'} component={Login}/>
+                <Stack.Screen name='login' component={Login}/>
                 <Stack.Screen name='compraIngresso' component={EfetuarCompra}/>
             </Stack.Navigator>
         </NavigationContainer>

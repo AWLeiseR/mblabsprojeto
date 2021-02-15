@@ -5,7 +5,7 @@ import {View,
     Alert,
     TouchableOpacity} from 'react-native'
 
-import Styles from '../PaginaInicial/style'
+import Styles from './style'
 
 import axios from 'axios'
 
@@ -71,14 +71,19 @@ const confirmarTelefoneTela = ({navigation,route}) =>{
 
     return(
         <View style={Styles.viewPrincipal}>
+            <Text style={Styles.tituloPagina}>Verificação</Text>
+            <View style={Styles.viewFrase}>
+                <Text style={Styles.frase}>Enviamos um código de confirmação para seu número de celular, verifique seus SMS.</Text>
+            </View>
+            
             <View style={Styles.viewLogin}>
-                <Text style={Styles.botaoPagina}>Código de confirmação</Text>
+                <Text style={Styles.botaoPagina}>Insira o código no campo a baixo.</Text>
                 <TextInput
                     placeholder='ex: 9999'
                     value={codigo}
                     onChangeText={onChangeCodigo}
                     style={Styles.inputApp}
-                    placeholderTextColor='#FFF'
+                    placeholderTextColor='#999'
                     maxLength={4}/>
 
                 <TouchableOpacity onPress={finalizarCadastro }

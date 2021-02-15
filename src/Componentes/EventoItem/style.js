@@ -12,33 +12,40 @@ const Styles = StyleSheet.create({
         alignSelf:'center',
         justifyContent:'center',
         
-        backgroundColor:'rgba(255,255, 255, 0.1)',
+        backgroundColor:'#fff',
         borderRadius:20,
-        marginBottom:5,
-        padding:10
+        marginBottom:10,
+        padding:10,
+        shadowColor: "#000",
+        shadowOffset: {width: 0,height: 8},
+        shadowOpacity: 0.44,
+        shadowRadius: 10.32,
+        elevation: 16,
     },
     nomeEvento:{
         fontSize:width/16,
         fontWeight:'bold',
         textAlign:'center',
-        color:cores.branco
+        color:cores.roxoLogo
     },
-    linha:{
+    coluna:{
         width:width/1.5,
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-between',
-        alignSelf:'center'
+        alignSelf:'center',
+        margin:10
         
     },
     infoEvento:{
         fontSize:15,
-        color:cores.branco
+        color:cores.cinza
     },
     precoStyle:{
         fontSize:width/20,
-        color:cores.branco,
-        textAlign:'center'
+        color:cores.roxoLogo,
+        fontWeight:'bold'
+        //textAlign:'center'
     },
     
     verMaisView:{
@@ -47,14 +54,18 @@ const Styles = StyleSheet.create({
     },
     verMaisBotao:{
         width:width/4,
-        borderRadius:5,
-        borderColor:cores.branco,
+        height:30,
+        borderRadius:20,
+        backgroundColor:'rgba(103,81,159,0.8)',
+        borderColor:cores.roxoLogo,
         borderWidth:1,
+        display:'flex',
+        justifyContent:'center'
 
     },
     verMaisText:{
         textAlign:'center',
-        color:cores.amarelo,
+        color:cores.branco,
         fontSize:15,
         fontWeight:'bold'
     }

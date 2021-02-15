@@ -11,55 +11,55 @@ const Styles = StyleSheet.create({
         height,
         display:'flex',
         alignItems: 'center',
-        backgroundColor:cores.roxoEscuro
+        backgroundColor:cores.cinza2
+    },
+    fraseMeio:{
+        color:cores.roxoLogo,
+        fontWeight:'700',
+        fontSize:23,
+        textAlign:'center'
     },
     viewLogin:{
         width :'80%',
-        height:'70%',
+        height:'50%',
         display:'flex',
-        flexDirection:'column',
+        
         justifyContent:'center',
         
     },
-    entrarBotao:{
-        width:width/2,
-        height:40,
+    viewImagem:{
+        width:'100%',
+        height:'30%',
         display:'flex',
-        borderColor:cores.branco,
-        borderWidth:2,
-        backgroundColor:'transparent',
+        alignContent:'center',
+        justifyContent:'center'
+    },
+    imagemLogo:{
+        marginTop:150,
         alignSelf:'center',
-        alignItems:'center',
-        justifyContent:'center',
-        borderRadius:5
+        width:200*1.3,
+        height:210
+       
     },
-    entrarBotaoText:{
-        color:cores.branco,
-        fontSize:20
-    },
-    nomeApp:{
-        fontSize:30,
-        color:cores.branco,
-        fontWeight:'bold'
-    },
-    fraseMeio:{
-        color:cores.amarelo,
-        fontWeight:'700',
-        fontSize:25,
-        textAlign:'center'
+    viewBotaoPagina:{
+        width,
+        display:'flex',
+        alignItems:'center'
     },
     botaoPagina:{
+        marginBottom:5,
+        borderRadius:30,
+        backgroundColor:cores.roxoLogo,
+        height:50,
+        width:width/2,
+        display:'flex',
+        justifyContent:'center'
+    },
+    botaoPaginaTexto:{
+        textAlign:'center',
         color:cores.branco,
         fontSize:20
     },
-    inputApp:{
-        borderBottomColor:cores.branco,
-        borderBottomWidth:1,
-        color:cores.branco,
-        paddingBottom:1,
-        fontSize:20,
-        marginBottom:10
-    }
 })
 
 export default Styles

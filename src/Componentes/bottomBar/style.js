@@ -5,8 +5,11 @@ const width = Dimensions.get('window').width
 
 const Styles = StyleSheet.create({
     viewPrincipal:{
-        height:80,
-        width:'100%'
+        height:60,
+        width:'100%',
+        backgroundColor:'rgba(103,81,159,1)',
+        
+        
     },
     viewSecundaria:{
         display:'flex',
@@ -32,7 +35,9 @@ const Styles = StyleSheet.create({
         textAlign:'center'
     },
     icones:{
-        alignSelf:'center'
+        alignSelf:'center',
+        width:width/18,
+        height:width/18
     }
 })
 export default Styles

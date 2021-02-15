@@ -9,7 +9,7 @@ const Styles = StyleSheet.create({
     viewPrincipal:{
         width:'100%',
         height:height/1.02,
-        backgroundColor:cores.roxoEscuro,
+        backgroundColor:cores.cinza2,
         display:'flex',
         alignItems:'center'
     },
@@ -20,10 +20,21 @@ const Styles = StyleSheet.create({
         justifyContent:'center',
         
     },
+    tituloPagina:{
+        color:cores.roxoLogo,
+        fontSize:40,
+        fontWeight:'bold',
+        textAlign:'center'
+    },
     labelInfoPrefil:{
-        color:cores.amarelo,
-        fontSize:20,
+        color:cores.roxoLogo,
+        fontSize:25,
         fontWeight:'bold'
+    },
+    infoPerfil:{
+        color:cores.cinza,
+        paddingLeft:50,
+        fontSize:20
     }
 })
 export default Styles

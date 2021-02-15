@@ -51,28 +51,28 @@ const EfetuarCompra=()=>{
                     <View style={Styles.viewInputInfoCartao}>
                         <TextInput
                             placeholder='Nome do titular'
-                            placeholderTextColor='rgba(255,255,255,0.8)'
+                            placeholderTextColor='#999'
                             style={Styles.inputInfoCartao}
                             onChangeText={onChangeNomeTitular}
                             value={nomeTitular}
                         />
                         <TextInput
                             placeholder='número do Cartao'
-                            placeholderTextColor='rgba(255,255,255,0.8)'
+                            placeholderTextColor='#999'
                             style={Styles.inputInfoCartao}
                             onChangeText={onChangeNumeroCartao}
                             value={numeroCartao}
                         />
                         <TextInput
                             placeholder='Validade'
-                            placeholderTextColor='rgba(255,255,255,0.8)'
+                            placeholderTextColor='#999'
                             style={Styles.inputInfoCartao}
                             onChangeText={onChangeValidade}
                             value={Validade}
                         />
                         <TextInput
                             placeholder='Código de segurança'
-                            placeholderTextColor='rgba(255,255,255,0.8)'
+                            placeholderTextColor='#999'
                             style={Styles.inputInfoCartao}
                             onChangeText={onChangeCodSeguranca}
                             value={CodSeguranca}

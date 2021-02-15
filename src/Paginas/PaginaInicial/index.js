@@ -2,44 +2,42 @@ import React, { useState } from 'react'
 import {
     View,
     Text,
-    TextInput,
-    Alert,
     TouchableOpacity,
-    KeyboardAvoidingView} from 'react-native'
+    KeyboardAvoidingView,
+    Image} from 'react-native'
 
-
-
-import Style from './style'
+import logo from '../../Utilitarios/icones/logoMBLabs.png'
+import Styles from './style'
 
 const PaginaInicial=({navigation})=>{
     return(
-        <KeyboardAvoidingView style={Style.viewPrincipal} behavior="padding" enabled>
-            
-                <Text style={Style.nomeApp}>MBLabs Eventos</Text>
-                
-                    <View style={Style.viewLogin}>
-                    
-                        <View >
-                        <Text style={Style.fraseMeio}>Compre de forma rápida e facil seu ingresso!</Text>  
-                        </View>
-                    
-                    </View>
+        <KeyboardAvoidingView  behavior="padding" enabled>
+            <View style={Styles.viewPrincipal}>
 
-                        <TouchableOpacity onPress={() => navigation.navigate('cadastroUsuario')} >
-                            <Text style={Style.botaoPagina}>Cadastrar-se</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('login')} >
-                            <Text style={Style.botaoPagina}>Entrar</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('paginaInicialLogado')} >
-                            <Text style={Style.botaoPagina}>Pagina Logado</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('perfil')} >
-                            <Text style={Style.botaoPagina}>Perfil</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('codigoSms')} >
-                            <Text style={Style.botaoPagina}>SMS</Text>
-                        </TouchableOpacity>
+                <View style={Styles.viewImagem}>
+                    <Image source={logo} style={Styles.imagemLogo}/>
+                </View>
+
+                <View style={Styles.viewLogin}>
+                    <Text style={Styles.fraseMeio}>Compre de forma rápida e fácil seu ingresso!</Text>  
+                </View>
+
+                <View style={Styles.viewBotaoPagina}>
+
+                    <TouchableOpacity style={Styles.botaoPagina}
+                        onPress={() => navigation.navigate('cadastroUsuario')} >
+                        <Text style={Styles.botaoPaginaTexto}>Cadastrar-se</Text>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity style={Styles.botaoPagina}
+                        onPress={() => navigation.navigate('login')} >
+                        <Text style={Styles.botaoPaginaTexto}s>Entrar</Text>
+                    </TouchableOpacity>
+                    
+                </View> 
+
+            </View>
+            
                     
         </KeyboardAvoidingView>   
     )
