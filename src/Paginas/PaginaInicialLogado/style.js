@@ -36,7 +36,6 @@ const Styles = StyleSheet.create({
     },
     viewButtonPesquisa:{
         position:'absolute',
-        width:width/1.2,
         height:35,
         display:'flex',
         justifyContent:'center',

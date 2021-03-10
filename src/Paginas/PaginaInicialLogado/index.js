@@ -126,8 +126,7 @@ const PaginaInicialLogado=({navigation})=>{
     }
     const callbackSair=()=>{
         removerMemoria()
-        .then(()=>navigation.navigate('paginaInicial'))
-        
+        .then(()=>navigation.navigate('paginaInicial'))   
     }
     return(
         <SafeAreaView style={{flex:1}}>
